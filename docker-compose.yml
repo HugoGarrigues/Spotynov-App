@@ -1,29 +1,33 @@
+version: '3.8'
+
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: spotynov-backend
-    ports:
-      - "3000:3000"
     volumes:
       - ./backend:/app
-    command: npm run start:dev
+      - /app/node_modules
+    ports:
+      - "3000:3000"
     environment:
-      - NODE_ENV=development
-    networks:
-      - app-network
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run start:dev
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: spotynov-frontend
-    ports:
-      - "5173:80"
     volumes:
       - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev -- --host
+
     depends_on:
       - backend
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
