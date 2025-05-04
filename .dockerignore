@@ -1,0 +1,24 @@
+# Ignore node_modules (les modules seront installés lors de la construction de l'image)
+node_modules/
+
+# Ignore les fichiers temporaires et les logs
+*.log
+*.tsbuildinfo
+
+# Ignore les fichiers de build
+/dist
+/build
+
+# Ignore les fichiers de configuration de IDE
+.vscode/
+.idea/
+
+# Ignore les tests et autres répertoires inutiles
+test/
+tests/
+
+# Ignore le répertoire de cache de npm
+npm-cache/
+
+# Ignore le fichier Dockerfile si tu en utilises plusieurs
+Dockerfile*
