@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: ./backend
+    container_name: spotynov-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    command: npm run start:dev
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: spotynov-frontend
+    ports:
+      - "5173:80"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
