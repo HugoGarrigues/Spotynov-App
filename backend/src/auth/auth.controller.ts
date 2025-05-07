@@ -5,7 +5,7 @@ import { AuthService } from './services/auth.service';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { LoginAuthDto } from './dto/login.dto';
 
-@ApiTags('auth') // Catégorie "auth" dans Swagger
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -22,17 +22,29 @@ export class AuthController {
 
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Récupérer le profil utilisateur' })
-  @ApiResponse({ status: 200, description: 'Profil utilisateur'}) 
+  @ApiResponse({ status: 200, description: 'Profil utilisateur' }) 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;
   }
 
-  @ApiOperation({ summary: 'Déconnexion utilisateur' })
-  @ApiResponse({ status: 200, description: 'Déconnecté avec succès' })
+  @ApiOperation({
+    summary: 'Déconnexion utilisateur',
+    description:
+      "Cette route ne supprime pas le token côté serveur, mais informe le client de le supprimer de son côté.",
+  })
+  @ApiResponse({
+    status: 200,
+    description: "Déconnexion réussie. Veuillez supprimer votre token JWT côté client.",
+  })
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()            
   @Post('logout')
   async logout(@Request() req) {
-    return req.logout();
+    return {
+      message:
+        "Déconnexion réussie. Veuillez supprimer votre token JWT du stockage local.",
+      user: req.user }
+    }
   }
-}
