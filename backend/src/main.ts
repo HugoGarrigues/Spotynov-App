@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('Spotynov API')
     .setDescription('API pour l’authentification et la gestion des utilisateurs')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
