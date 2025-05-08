@@ -1,15 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { User } from '../models/users.models';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const filePath = path.join(__dirname, '../users.json');
+const filePath = path.join(__dirname, '../../users.json');
 
 @Injectable()
 export class UsersService {
   private readFile(): User[] {
+    if (!fs.existsSync(filePath)) return [];
     return JSON.parse(fs.readFileSync(filePath, 'utf8') || '[]');
   }
 
@@ -21,35 +22,46 @@ export class UsersService {
     return this.readFile();
   }
 
-  async findOne(username: string) {
-    const users = await this.readFile();
+  async findOne(username: string): Promise<User | undefined> {
+    const users = this.readFile();
     return users.find(user => user.username === username);
   }
-  
 
   create(createUserDto: CreateUserDto): User {
     const users = this.readFile();
+
+    const existing = users.find(user => user.username === createUserDto.username);
+    if (existing) {
+      throw new BadRequestException('Nom d’utilisateur déjà utilisé');
+    }
+
     const newUser: User = {
-      id: Date.now(),
       ...createUserDto,
+      groupName: null,
+      isGroupLeader: false,
     };
+
     users.push(newUser);
     this.writeFile(users);
     return newUser;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto): User {
+  update(username: string, updateUserDto: UpdateUserDto): User {
     const users = this.readFile();
-    const index = users.findIndex(u => u.id === id);
-    if (index === -1) throw new NotFoundException(`User ${id} not found`);
+    const index = users.findIndex(u => u.username === username);
+    if (index === -1) throw new NotFoundException(`Utilisateur ${username} non trouvé`);
+
     users[index] = { ...users[index], ...updateUserDto };
     this.writeFile(users);
     return users[index];
   }
 
-  remove(id: number): void {
-    let users = this.readFile();
-    users = users.filter(u => u.id !== id);
-    this.writeFile(users);
+  remove(username: string): void {
+    const users = this.readFile();
+    const updated = users.filter(u => u.username !== username);
+    if (users.length === updated.length) {
+      throw new NotFoundException(`Utilisateur ${username} non trouvé`);
+    }
+    this.writeFile(updated);
   }
 }
