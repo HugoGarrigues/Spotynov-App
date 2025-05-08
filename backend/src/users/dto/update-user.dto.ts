@@ -21,14 +21,6 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   password?: string;
 
   @ApiPropertyOptional({
-    description: 'Identifiant du groupe (si applicable)',
-    example: 'grp-456',
-  })
-  @IsString()
-  @IsOptional()
-  groupId?: string;
-
-  @ApiPropertyOptional({
     description: 'Est-ce le chef du groupe ?',
     example: false,
   })

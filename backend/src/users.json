@@ -1,0 +1,20 @@
+[
+  {
+    "username": "hgrs",
+    "password": "password123",
+    "isGroupLeader": true,
+    "groupName": "string"
+  },
+  {
+    "username": "test",
+    "password": "password123",
+    "isGroupLeader": true,
+    "groupName": "stfring"
+  },
+  {
+    "username": "johndoe",
+    "password": "password123",
+    "isGroupLeader": false,
+    "groupName": "string"
+  }
+]

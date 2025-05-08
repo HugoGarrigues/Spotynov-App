@@ -4,7 +4,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 
-@ApiTags('users') // ➜ Catégorie Swagger
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) { }
@@ -33,20 +33,20 @@ export class UsersController {
         return this.usersService.findOne(username);
     }
     
-    @Patch(':id')
+    @Patch(':username')
     @ApiOperation({ summary: 'Mettre à jour un utilisateur' })
     @ApiResponse({ status: 200, description: 'Utilisateur mis à jour' })
-    @ApiParam({ name: 'id', type: Number })
+    @ApiParam({ name: 'username', type: String })
     @ApiBody({ type: UpdateUserDto })
-    update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-        return this.usersService.update(+id, updateUserDto);
+    update(@Param('username') username: string, @Body() updateUserDto: UpdateUserDto) {
+        return this.usersService.update(username, updateUserDto);
     }
 
-    @Delete(':id')
+    @Delete(':username')
     @ApiOperation({ summary: 'Supprimer un utilisateur' })
     @ApiResponse({ status: 200, description: 'Utilisateur supprimé' })
-    @ApiParam({ name: 'id', type: Number })
-    remove(@Param('id') id: number) {
-        return this.usersService.remove(+id);
+    @ApiParam({ name: 'username', type: String })
+    remove(@Param('username') username: string) {
+        return this.usersService.remove(username);
     }
 }
