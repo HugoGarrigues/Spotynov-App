@@ -23,9 +23,11 @@ export class UsersService {
   }
 
   async findOne(username: string): Promise<User | undefined> {
-    const users = this.readFile();
-    return users.find(user => user.username === username);
-  }
+  const users = this.readFile();
+  const found = users.find(user => user.username === username);
+  console.log('🔍 Recherche utilisateur :', username, 'Résultat trouvé :', found);
+  return found;
+}
 
   create(createUserDto: CreateUserDto): User {
     const users = this.readFile();

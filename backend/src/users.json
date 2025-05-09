@@ -4,8 +4,8 @@
     "password": "password123",
     "isGroupLeader": true,
     "groupName": "string",
-    "spotifyAccessToken": "BQBIO6p01jICmA3SJ7fqdIgleBdVaOfGhBUBmP3ZUafJb4t2VUu9ho1IAWV0jTR8_lA4R1HPB1D8152yT3-x8FAs5ckiO6HnUbfris_1jCaNmoRwYzr52gjf8tq-k6j_im7fsqOz22_ZH88MNV_e-3NShqM3_LLaULMvoSfb4IA3p6SMy-EmfT0-0wLffk027du2mt0wCOxU9kb0Ol-F7hcmaQ3xhuhL3iFbcl8SbNir0mTGg60fTISadkchn1Aa9rxppcwvxns",
-    "spotifyRefreshToken": "AQD0aKFF6Lh5mKKJIcc_UDGFY69AXMKD8Bqh-fW8H_SItLHmPe-GvJ2JIVtdPenBJXbtUmfXdx458Xkvq2y6i0PF_oSpdBEq5zwgB5TfHx-gCMftS7O1ZB-AZNXV6UISDyQ"
+    "spotifyAccessToken": "BQBfPEhAcW2Xaws_f0CT4U8pPnv9m8NcSOAuwxNg7zPyl-1n1oe1UWJeI-gtoBJiUmIzFupFyH93kEuDX1dvk8NSO3alnFu1hmDZfErAby7v8q1ewkk78fJMk7rbFOetNHZfE9VLLYyvm5zUfssPIt_fvS9-yb9hzkUr1oyP65WAc955ZKISs74J36HP8f-1hFI8DMAmYROlb3sz794_CYN6auwFpShkoGUUUJXoCHQofAdohWy6mqKCI0VddSZEMzH_3WZmdzw",
+    "spotifyRefreshToken": "AQBkuwcd6YqRjLU3VTtga7f1DQedDGFu_YVfMXGZlXZ8lTUkaS31sIEHBvcKOJurtq-dcU3f4rMqKwrblV6slCwU6Ox4KCk3ZM6uzlATSwWHHoNElWXdvndQSD3-GuK7KvQ"
   },
   {
     "username": "test",
@@ -17,7 +17,9 @@
     "username": "johndoe",
     "password": "password123",
     "isGroupLeader": false,
-    "groupName": "testThomas"
+    "groupName": "testThomas",
+    "spotifyAccessToken": "BQA5zm5_zPqtRC38JeraGv4_OnWy8sQ5eeWvEEQwKvFqLa5-V_eLrZ55sjD856jCI4MWECkgs-y2ivlAe7boa0dvk9QiQNEfGlomoP1xRs9L2Y6_eFPB5u7uKNSZLh_ZdLsFPQ5Kzg2ole8OhETEVEdEPCGvjL6UKXhHHHdVDsb6zfMYSOkpoFO88DsS8HBRlf06S-gap6_caTwehDnygvGV_3QVmPPyOcaM0w9I3IXIqNApJph1QW5A78riAeoY35enNLxZ_kE",
+    "spotifyRefreshToken": "AQDrQ628zRb3VrRi7jGOQuDjUKHdYU5DqO-gsEcRuAHk1Jui7cLX5gGO3UCVynjoJ2fz4fNNyJFPTPIae8_o3mfbQhf3XLnfrj_zbk0Or5FqpqKJ_PyQlnbQfmZUknva81s"
   },
   {
     "username": "Hgrss",
@@ -26,5 +28,13 @@
     "isGroupLeader": false,
     "spotifyAccessToken": "BQBUQHjyapT4VtNi_4m6O2xSeolJArMD08kISNd45ilVTByz4VTg0IHCcp_uy0kn9bIob_OK7812PSNFREcqwMwvbsPlPco3E1iC3D_4UWti67mzgxj1QVe_Ui_OFUitL0iR-CoPfzKCXeI_F7o8r1_KpgbvLvXKsbh0Ngvw5U4Rz90xL8FJy328nw4MVMuXWm4xLZ2ClMftJw0pBXBoYwOJZxOLCR0W8maJejdYOlvegSdEqG-_L_nt03IH92f-Cj9VsoBuamw",
     "spotifyRefreshToken": "AQCuBu-tPj6S7TAo-cxPRFzdeca910e-AINXY_7U_YWDnFFNBYrmOo2BZMCIxnL5jgKtBT3m5cHQYczV2r8dA3hGJazGJntuEgGaj7keqQppss2dbDZMTh8iFW3CKOjEPfc"
+  },
+  {
+    "username": "tho",
+    "password": "tho123",
+    "groupName": null,
+    "isGroupLeader": false,
+    "spotifyAccessToken": "BQBVOlD80yh5kTlCjW_PxuRX_atyAm9CdP5Ls9Ig9YIR501rY91aukm6oJtaug_5z7LL591884-MHFK-cFhXStdK1Y1RqSk1gf7PDH1QgH9MhX2qIGGCjwNgQ189NbaLwFXtcRZhiKE9k3wfWcOoAhN8ygT0WsR_Nw9QNANY2Kv7kVbkPMEezk_-v_MXzk6jbB_cRocW9thhQSEwerTYQfXb2eh_KPG0mLHa9n5_TEFmmyfGhQJPnGSMPtj6yuDXVPVy3enyttiBOghY5Vr7aA",
+    "spotifyRefreshToken": "AQAauuMBaSCppvSXgNmZL-cTKofg9qkUbollfotitzxofxVdvgAqWmDOovDieZI-cJU5HU1i2FzHuuYHKDhdAg4dDplHFmAGjHaCwBT9tLjKVjtnHamlVFH-z158GvmaQWc"
   }
 ]

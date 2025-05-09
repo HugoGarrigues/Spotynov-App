@@ -17,6 +17,7 @@ export class SpotifyService {
       'user-read-recently-played',
       'user-top-read',
       'user-read-playback-state',
+      'user-library-read',
     ].join(' ');
 
     return `https://accounts.spotify.com/authorize` +
@@ -39,12 +40,50 @@ export class SpotifyService {
     });
 
     const tokenData = response.data as { access_token: string; refresh_token: string };
-
     await this.usersService.updateSpotifyTokens(username, tokenData.access_token, tokenData.refresh_token);
-
     return {
       access_token: tokenData.access_token,
       refresh_token: tokenData.refresh_token,
     };
   }
+
+  async getUserPersonality(username: string): Promise<any> {
+  if (!username || username === 'me') {
+    throw new Error('Nom d’utilisateur invalide ou non résolu');
+  }
+
+  const user = await this.usersService.findOne(username);
+  console.log('🧪 Fetched user from JSON:', user);
+
+  if (!user || !user.spotifyAccessToken) {
+    throw new Error('Utilisateur non connecté à Spotify');
+  }
+
+  const token = user.spotifyAccessToken;
+  const response = await axios.get('https://api.spotify.com/v1/me/tracks', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseData = response.data as { items: any[] };
+  const likedTracks = responseData.items;
+
+  if (!likedTracks.length) {
+    throw new Error('Aucun titre liké trouvé');
+  }
+
+  const totalPopularity = likedTracks.reduce((sum, item) => sum + item.track.popularity, 0);
+  const avgPopularity = totalPopularity / likedTracks.length;
+
+  const totalDuration = likedTracks.reduce((sum, item) => sum + item.track.duration_ms, 0);
+  const avgDuration = totalDuration / likedTracks.length;
+
+  return {
+    averagePopularity: avgPopularity,
+    averageDurationMs: avgDuration,
+  };
+}
+
+
 }
