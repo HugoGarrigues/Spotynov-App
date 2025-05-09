@@ -5,5 +5,6 @@ export interface User {
     groupName?: string | null;
     spotifyAccessToken?: string | null;
     spotifyRefreshToken?: string | null;
+    spotifyUserId?: string | null;
   }
   

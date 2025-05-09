@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Res, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Query, Res, UseGuards, Req, Param } from '@nestjs/common';
 import { SpotifyService } from '../services/spotify.service';
 import { Response, Request } from 'express';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
@@ -26,5 +26,22 @@ export class SpotifyController {
     const user = req.user as any; 
     const tokens = await this.spotifyService.handleSpotifyCallback(code, user.username);
     return res.json(tokens);
+  }
+
+  @Get('personality/me')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Analyse de personnalité de soi-même' })
+  async getMyPersonality(@Req() req: Request) {
+    const user = req.user as any;
+    return this.spotifyService.getUserPersonality(user.username);
+  }
+
+  @Get('personality/:username')
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Analyse de personnalité Spotify d’un utilisateur spécifique' })
+  @ApiBearerAuth()
+  async getPersonalityByUsername(@Param('username') username: string) {
+    return this.spotifyService.getUserPersonality(username);
   }
 }

@@ -46,10 +46,16 @@ export class GroupsController {
   }
 
   @Get(':groupName')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Obtenir les détails d\'un groupe' })
   @ApiResponse({ status: 200, description: 'Détails du groupe' })
-  getGroupDetails(@Param('groupName') groupName: string) {
-    return this.groupsService.getGroupDetails(groupName);
+  getGroupDetails(
+    @Param('groupName') groupName: string,
+    @Req() req: any
+  ) {
+    const requestingUsername = req.user?.username;
+    return this.groupsService.getGroupDetails(groupName, requestingUsername);
   }
 
 }
