@@ -36,5 +36,23 @@
     "isGroupLeader": false,
     "spotifyAccessToken": null,
     "spotifyRefreshToken": null
+  },
+  {
+    "username": "userA",
+    "password": "A",
+    "groupName": "TestPlaylist",
+    "isGroupLeader": true,
+    "spotifyAccessToken": "BQBmjoJ0d7jxmGjgfEPmcz8AHMViI2P_fZlSOfwzsXJKxXE1jztiJXm9_zpQf1ShRK4FYJKIvdPqrd1zkv5S_zQW0mk9eh-dvvaNn12HUD6_mX6_IA-vCPKyvE7z8MLH-2jIElP3ffhnErcw1nXqTgEa0wmt-m7geMDP7B4t2J1cCXbsbkJ6uG-EEICzpCHJC6EyHRZcb6bxBBHC56NyXdmMCvTkuTZQy7MbX4CVucIHcCzgXAryVpbEhebwuEjU1YY9jAEkfeOUpT3dGnOBJuyMlS_GQLnn4nQJCxIwvZftGbjBgN8",
+    "spotifyRefreshToken": "AQAZNdPV-H-Q1HJIzCF1c0xr4M0ABW25_tcpE1dwsWWysYV7HvTvDTCxnjav-h7859CQO5NhYYb7ZajiH1kc-4xGd88UQ77Rpbuf4UpYIfFYsmSh5_Rs30nukmOo48TsM4U",
+    "spotifyUserId": "zyf2slegyr92o9ub0219y8kdl"
+  },
+  {
+    "username": "userB",
+    "password": "B",
+    "groupName": "TestPlaylist",
+    "isGroupLeader": false,
+    "spotifyAccessToken": null,
+    "spotifyRefreshToken": null,
+    "spotifyUserId": null
   }
 ]

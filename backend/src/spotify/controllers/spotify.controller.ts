@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Res, UseGuards, Req, Param } from '@nestjs/common';
+import { Controller, Get, Query, Post, Res, UseGuards, Req, Param } from '@nestjs/common';
 import { SpotifyService } from '../services/spotify.service';
 import { Response, Request } from 'express';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
@@ -44,4 +44,17 @@ export class SpotifyController {
   async getPersonalityByUsername(@Param('username') username: string) {
     return this.spotifyService.getUserPersonality(username);
   }
+
+  @Post('playlist/:targetUsername')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Créer une playlist à partir des musiques préférées d’un utilisateur du même groupe' })
+  async createPlaylist(
+    @Req() req: Request,
+    @Param('targetUsername') targetUsername: string,
+  ) {
+    const sourceUser = req.user as any;
+    return this.spotifyService.createTopTracksPlaylist(sourceUser.username, targetUsername);
+  }
+
 }
