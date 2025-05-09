@@ -2,6 +2,9 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import * as fs from 'fs';
 import * as path from 'path';
 import { User } from '../../users/models/users.models';
+import axios from 'axios';
+import { ForbiddenException } from '@nestjs/common/exceptions';
+import { SpotifyProfile, SpotifyCurrentlyPlaying } from '../../spotify/models/spotify.model';
 
 const USERS_FILE = path.join(__dirname, '../../users.json');
 
@@ -123,45 +126,74 @@ export class GroupsService {
     };
   }
 
-  async getGroupMembers(groupName: string) {
-    const users = await this.readUsersFile();
-    const groupMembers = users.filter(user => user.groupName === groupName);
-
-    if (groupMembers.length === 0) {
-      throw new NotFoundException(`Aucun membre trouvé pour le groupe '${groupName}'`);
-    }
-
-    return groupMembers.map(member => ({
-      username: member.username,
-      isGroupLeader: member.isGroupLeader,
-    }));
-  }
-
   async getAllGroups() {
     const users = await this.readUsersFile();
-    const groups = Array.from(new Set(users.map(user => user.groupName).filter(Boolean)));
+
+    const groupNames = Array.from(new Set(users.map(user => user.groupName).filter(Boolean)));
+
+    const groups = groupNames.map(groupName => ({
+      groupName,
+      userCount: users.filter(user => user.groupName === groupName).length,
+    }));
 
     if (groups.length === 0) {
-      throw new NotFoundException(`Aucun groupe trouvé`);
+      throw new NotFoundException('Aucun groupe trouvé');
     }
 
     return groups;
   }
 
-  async getGroupDetails(groupName: string) {
+  async getGroupDetails(groupName: string, requestingUsername: string) {
     const users = await this.readUsersFile();
+    const requestingUser = users.find(u => u.username === requestingUsername);
     const groupMembers = users.filter(user => user.groupName === groupName);
-
-    if (groupMembers.length === 0) {
-      throw new NotFoundException(`Aucun membre trouvé pour le groupe '${groupName}'`);
+  
+    if (!requestingUser || requestingUser.groupName == null) {
+      throw new ForbiddenException("Vous n'êtes pas autorisé à consulter ce groupe.");
     }
-
-    return {
-      groupName,
-      members: groupMembers.map(member => ({
-        username: member.username,
-        isGroupLeader: member.isGroupLeader,
-      })),
-    };
+  
+    if (groupMembers.length === 0) {
+      throw new NotFoundException(`Aucun utilisateur trouvé dans le groupe ${groupName}`);
+    }
+  
+    const membersDetails = await Promise.all(
+      groupMembers.map(async (member) => {
+        const { username, isGroupLeader, spotifyAccessToken } = member;
+        const result: any = { username, isGroupLeader };
+  
+        if (!spotifyAccessToken) return result;
+  
+        try {
+          const profileRes = await axios.get<SpotifyProfile>(
+            'https://api.spotify.com/v1/me',
+            { headers: { Authorization: `Bearer ${spotifyAccessToken}` } }
+          );
+          result.spotifyUsername = profileRes.data.display_name;
+  
+          const playingRes = await axios.get<SpotifyCurrentlyPlaying>(
+            'https://api.spotify.com/v1/me/player/currently-playing',
+            { headers: { Authorization: `Bearer ${spotifyAccessToken}` } }
+          );
+  
+          const item = playingRes.data?.item;
+          if (playingRes.status === 200 && item) {
+            result.currentTrack = {
+              title: item.name,
+              artist: item.artists.map(a => a.name).join(', '),
+              album: item.album.name,
+            };
+            result.device = playingRes.data.device?.name ?? null;
+          }
+        } catch (error) {
+          console.error(`Erreur Spotify pour l'utilisateur ${username}:`, error.message);
+        }
+  
+        return result;
+      })
+    );
+  
+    return { groupName, members: membersDetails };
   }
+  
+
 }

@@ -39,12 +39,32 @@ export class SpotifyService {
     });
 
     const tokenData = response.data as { access_token: string; refresh_token: string };
+    const access_token = tokenData.access_token;
+    const refresh_token = tokenData.refresh_token;
 
-    await this.usersService.updateSpotifyTokens(username, tokenData.access_token, tokenData.refresh_token);
+    const profileRes = await axios.get<{ id: string }>('https://api.spotify.com/v1/me', {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+
+    const spotifyUserId = profileRes.data.id;
+
+    const users = await this.usersService.findAll();
+
+    for (const user of users) {
+      if (user.username !== username && user.spotifyUserId === spotifyUserId) {
+        user.spotifyAccessToken = null;
+        user.spotifyRefreshToken = null;
+        user.spotifyUserId = null;
+      }
+    }
+
+    await this.usersService.writeFile(users);
+
+    await this.usersService.updateSpotifyTokens(username, access_token, refresh_token, spotifyUserId);
 
     return {
-      access_token: tokenData.access_token,
-      refresh_token: tokenData.refresh_token,
+      access_token,
+      refresh_token
     };
   }
 }

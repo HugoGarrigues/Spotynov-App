@@ -14,7 +14,7 @@ export class UsersService {
     return JSON.parse(fs.readFileSync(filePath, 'utf8') || '[]');
   }
 
-  private writeFile(data: User[]) {
+  public writeFile(data: User[]) {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
   }
 
@@ -68,17 +68,16 @@ export class UsersService {
     this.writeFile(updated);
   }
 
-  async updateSpotifyTokens(username: string, accessToken: string, refreshToken: string): Promise<void> {
-    const users = this.findAll();
-    const userIndex = users.findIndex(user => user.username === username);
+  async updateSpotifyTokens(username: string, accessToken: string, refreshToken: string, spotifyUserId?: string) {
+    const users = await this.findAll();
+    const user = users.find(u => u.username === username);
+    if (!user) return;
   
-    if (userIndex === -1) throw new Error('Utilisateur non trouvé');
+    user.spotifyAccessToken = accessToken;
+    user.spotifyRefreshToken = refreshToken;
+    if (spotifyUserId) user.spotifyUserId = spotifyUserId;
   
-    users[userIndex].spotifyAccessToken = accessToken;
-    users[userIndex].spotifyRefreshToken = refreshToken;
-  
-    
-    this.writeFile(users);
+    await this.writeFile(users);
   }
-  
+
 }
