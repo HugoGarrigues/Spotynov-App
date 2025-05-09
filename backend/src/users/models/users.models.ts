@@ -3,7 +3,7 @@ export interface User {
     password: string;
     isGroupLeader?: boolean;
     groupName?: string | null;
-    spotifyUsername?: string | null;
-    spotifyToken?: string | null;
+    spotifyAccessToken?: string | null;
+    spotifyRefreshToken?: string | null;
   }
   

@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { SpotifyController } from './controllers/spotify.controller';
 import { SpotifyService } from './services/spotify.service';
+import { SpotifyController } from './controllers/spotify.controller';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  controllers: [SpotifyController],
+  imports: [UsersModule], 
   providers: [SpotifyService],
+  controllers: [SpotifyController],
 })
 export class SpotifyModule {}

@@ -3,7 +3,9 @@
     "username": "hgrs",
     "password": "password123",
     "isGroupLeader": true,
-    "groupName": "string"
+    "groupName": "string",
+    "spotifyAccessToken": "BQBIO6p01jICmA3SJ7fqdIgleBdVaOfGhBUBmP3ZUafJb4t2VUu9ho1IAWV0jTR8_lA4R1HPB1D8152yT3-x8FAs5ckiO6HnUbfris_1jCaNmoRwYzr52gjf8tq-k6j_im7fsqOz22_ZH88MNV_e-3NShqM3_LLaULMvoSfb4IA3p6SMy-EmfT0-0wLffk027du2mt0wCOxU9kb0Ol-F7hcmaQ3xhuhL3iFbcl8SbNir0mTGg60fTISadkchn1Aa9rxppcwvxns",
+    "spotifyRefreshToken": "AQD0aKFF6Lh5mKKJIcc_UDGFY69AXMKD8Bqh-fW8H_SItLHmPe-GvJ2JIVtdPenBJXbtUmfXdx458Xkvq2y6i0PF_oSpdBEq5zwgB5TfHx-gCMftS7O1ZB-AZNXV6UISDyQ"
   },
   {
     "username": "test",
@@ -16,5 +18,13 @@
     "password": "password123",
     "isGroupLeader": false,
     "groupName": "testThomas"
+  },
+  {
+    "username": "Hgrss",
+    "password": "password123",
+    "groupName": null,
+    "isGroupLeader": false,
+    "spotifyAccessToken": "BQBUQHjyapT4VtNi_4m6O2xSeolJArMD08kISNd45ilVTByz4VTg0IHCcp_uy0kn9bIob_OK7812PSNFREcqwMwvbsPlPco3E1iC3D_4UWti67mzgxj1QVe_Ui_OFUitL0iR-CoPfzKCXeI_F7o8r1_KpgbvLvXKsbh0Ngvw5U4Rz90xL8FJy328nw4MVMuXWm4xLZ2ClMftJw0pBXBoYwOJZxOLCR0W8maJejdYOlvegSdEqG-_L_nt03IH92f-Cj9VsoBuamw",
+    "spotifyRefreshToken": "AQCuBu-tPj6S7TAo-cxPRFzdeca910e-AINXY_7U_YWDnFFNBYrmOo2BZMCIxnL5jgKtBT3m5cHQYczV2r8dA3hGJazGJntuEgGaj7keqQppss2dbDZMTh8iFW3CKOjEPfc"
   }
 ]

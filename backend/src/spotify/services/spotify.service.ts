@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { UsersService } from '../../users/services/users.service';
 
 @Injectable()
 export class SpotifyService {
+  constructor(private usersService: UsersService) {}
+
   private clientId = process.env.SPOTIFY_CLIENT_ID as string;
   private clientSecret = process.env.SPOTIFY_CLIENT_SECRET as string;
-  private redirectUri = process.env.SPOTIFY_CALLBACK_URL as string;
+  private redirectUri = process.env.SPOTIFY_REDIRECT_URI as string;
 
   getSpotifyAuthUrl(): string {
     const scopes = [
@@ -23,7 +26,7 @@ export class SpotifyService {
       `&scope=${encodeURIComponent(scopes)}`;
   }
 
-  async handleSpotifyCallback(code: string): Promise<{ access_token: string; refresh_token: string }> {
+  async handleSpotifyCallback(code: string, username: string): Promise<{ access_token: string; refresh_token: string }> {
     const params = new URLSearchParams();
     params.append('grant_type', 'authorization_code');
     params.append('code', code);
@@ -36,6 +39,8 @@ export class SpotifyService {
     });
 
     const tokenData = response.data as { access_token: string; refresh_token: string };
+
+    await this.usersService.updateSpotifyTokens(username, tokenData.access_token, tokenData.refresh_token);
 
     return {
       access_token: tokenData.access_token,

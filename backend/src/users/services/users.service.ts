@@ -39,6 +39,8 @@ export class UsersService {
       ...createUserDto,
       groupName: null,
       isGroupLeader: false,
+      spotifyAccessToken: null,
+      spotifyRefreshToken: null,
     };
 
     users.push(newUser);
@@ -53,6 +55,7 @@ export class UsersService {
 
     users[index] = { ...users[index], ...updateUserDto };
     this.writeFile(users);
+    
     return users[index];
   }
 
@@ -64,4 +67,18 @@ export class UsersService {
     }
     this.writeFile(updated);
   }
+
+  async updateSpotifyTokens(username: string, accessToken: string, refreshToken: string): Promise<void> {
+    const users = this.findAll();
+    const userIndex = users.findIndex(user => user.username === username);
+  
+    if (userIndex === -1) throw new Error('Utilisateur non trouvé');
+  
+    users[userIndex].spotifyAccessToken = accessToken;
+    users[userIndex].spotifyRefreshToken = refreshToken;
+  
+    
+    this.writeFile(users);
+  }
+  
 }
