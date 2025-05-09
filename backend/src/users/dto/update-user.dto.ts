@@ -42,7 +42,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   })
   @IsString()
   @IsOptional()
-  spotifyUsername?: string;
+  spotifyAccessToken?: string;
 
   @ApiPropertyOptional({
     description: 'Nouveau token Spotify',
@@ -50,5 +50,5 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   })
   @IsString()
   @IsOptional()
-  spotifyToken?: string;
+  spotifyRefreshToken?: string;
 }
