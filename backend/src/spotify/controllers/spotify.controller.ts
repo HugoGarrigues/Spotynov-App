@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Res, UseGuards, Req, Param } from '@nestjs/common';
+import { Controller, Get, Post, Query, Res, UseGuards, Req, Param } from '@nestjs/common';
 import { SpotifyService } from '../services/spotify.service';
 import { Response, Request } from 'express';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
@@ -44,4 +44,14 @@ export class SpotifyController {
   async getPersonalityByUsername(@Param('username') username: string) {
     return this.spotifyService.getUserPersonality(username);
   }
+
+  @Post('sync')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Synchronise la musique actuelle de l’admin sur les membres du groupe' })
+  async syncMusic(@Req() req: Request) {
+    const user = req.user as any;
+    return this.spotifyService.syncMusicToGroup(user.username);
+  }
+
 }

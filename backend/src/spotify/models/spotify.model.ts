@@ -10,4 +10,14 @@ export type SpotifyProfile = {
     };
     device?: { name?: string };
   };
+
+  export interface SpotifyTrackSyncResponse {
+  item: {
+    uri: string;
+    name: string;
+    artists: { name: string }[];
+  };
+  progress_ms: number;
+}
+
   

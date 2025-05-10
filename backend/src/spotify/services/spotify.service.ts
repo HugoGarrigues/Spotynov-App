@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { SpotifyTrackSyncResponse } from '../models/spotify.model';
+
 import { UsersService } from '../../users/services/users.service';
 
 @Injectable()
@@ -18,6 +20,7 @@ export class SpotifyService {
       'user-top-read',
       'user-read-playback-state',
       'user-library-read',
+      'user-modify-playback-state',
     ].join(' ');
 
     return `https://accounts.spotify.com/authorize` +
@@ -106,5 +109,65 @@ export class SpotifyService {
       averageDurationMs: avgDuration,
     };
   }
+
+  async syncMusicToGroup(adminUsername: string) {
+  const admin = await this.usersService.findOne(adminUsername);
+  if (!admin || !admin.isGroupLeader || !admin.groupName || !admin.spotifyAccessToken) {
+    throw new Error("L'utilisateur n'est pas autorisé à synchroniser la musique.");
+  }
+
+  const groupMembers = this.usersService.findAll().filter(
+    u => u.groupName === admin.groupName && u.username !== adminUsername && u.spotifyAccessToken
+  );
+
+  const currentTrackRes = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
+    headers: {
+      Authorization: `Bearer ${admin.spotifyAccessToken}`,
+    },
+  });
+
+  const trackData = currentTrackRes.data as SpotifyTrackSyncResponse;
+
+  if (!trackData || !trackData.item || !trackData.progress_ms) {
+    throw new Error("Aucune musique en cours trouvée pour l'administrateur.");
+  }
+
+  const trackUri = trackData.item.uri;
+  const positionMs = trackData.progress_ms;
+
+  const results: Record<string, string> = {};
+
+  for (const member of groupMembers) {
+    try {
+      await axios.put(
+        'https://api.spotify.com/v1/me/player/play',
+        {
+          uris: [trackUri],
+          position_ms: positionMs,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${member.spotifyAccessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      results[member.username] = '✅ Success';
+    } catch (err) {
+      console.error(`Erreur pour ${member.username}:`, err?.response?.data || err.message);
+      results[member.username] = '❌ Erreur';
+    }
+  }
+
+  return {
+    message: `Synchronisation lancée pour le groupe ${admin.groupName}`,
+    track: {
+      name: trackData.item.name,
+      artist: trackData.item.artists.map((a: any) => a.name).join(', '),
+    },
+    results,
+  };
+}
+
   
 }
