@@ -4,6 +4,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as crypto from 'crypto';
 
 const filePath = path.join(__dirname, '../../users.json');
 
@@ -21,7 +22,7 @@ export class UsersService {
   findAll(): User[] {
     return this.readFile();
   }
-
+  
   async findOne(username: string): Promise<User | undefined> {
     const users = this.readFile();
     const found = users.find(user => user.username === username);
@@ -36,8 +37,11 @@ export class UsersService {
       throw new BadRequestException('Nom d’utilisateur déjà utilisé');
     }
 
+    const hashedPassword = this.hashPassword(createUserDto.password);
+
     const newUser: User = {
       ...createUserDto,
+      password: hashedPassword,
       groupName: null,
       isGroupLeader: false,
       spotifyAccessToken: null,
@@ -82,4 +86,7 @@ export class UsersService {
     await this.writeFile(users);
   }
 
+  private hashPassword(password: string): string {
+  return crypto.createHash('sha256').update(password).digest('hex');
+  }
 }
