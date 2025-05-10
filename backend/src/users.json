@@ -1,65 +1,18 @@
 [
   {
     "username": "hgrs",
-    "password": "password123",
-    "isGroupLeader": false,
-    "spotifyAccessToken": null,
-    "spotifyRefreshToken": null,
-    "spotifyUserId": null,
-    "groupName": "groupe1"
-  },
-  {
-    "username": "test",
-    "password": "password123",
-    "isGroupLeader": true,
-    "groupName": "stfring"
-  },
-  {
-    "username": "johndoe",
-    "password": "password123",
-    "isGroupLeader": true,
-    "groupName": "testThomas"
-  },
-  {
-    "username": "Hgrss",
-    "password": "password123",
-    "groupName": "groupe1",
-    "isGroupLeader": true,
-    "spotifyAccessToken": "BQC_cp0PiB_l3Zgm1no2DVwOJmZoZHatihGMci_I5hYYXbckpfdhkolW4ycXXQ0AJR2_b9pJdrshZWYYo4CwNepYPfuPAr6sWYNT00boa26Q6mrspQ-BrfLdfnQ4gLgsXepN-1WA0SUakAoHatodgcGq60-FbMvW-QREEk6QTEBj5XfE5xWYhTTlF22UtXdb6S6uoQu12gduWwoGJUr54JFChWxiKSPz-qZkkVcqkWMOg76J4qEpVXRaSGrtpo7D0xswo9fClhw6eAHzGRlQd5ewhDe5rWC-T0teGie1puT64EX-dXU",
-    "spotifyRefreshToken": "AQCZfV3o124mYi5W_TC8bffBxZT6DlCbNpUzSCCyCaZgXroDSrK4OtOUfOmGnkvOg1ULXGroJXKWp1R31bJqbw8rh7G84db4pxOCFNzQ9hrLRxdwX5yzgmJTRYi341THzdE",
-    "spotifyUserId": null
-  },
-  {
-    "username": "johnfdoe",
-    "password": "password123",
-    "groupName": "groupe1",
-    "isGroupLeader": false,
-    "spotifyAccessToken": null,
-    "spotifyRefreshToken": null
-  },
-  {
-    "username": "userA",
-    "password": "A",
-    "groupName": "TestPlaylist",
-    "isGroupLeader": true,
-    "spotifyAccessToken": "BQBmjoJ0d7jxmGjgfEPmcz8AHMViI2P_fZlSOfwzsXJKxXE1jztiJXm9_zpQf1ShRK4FYJKIvdPqrd1zkv5S_zQW0mk9eh-dvvaNn12HUD6_mX6_IA-vCPKyvE7z8MLH-2jIElP3ffhnErcw1nXqTgEa0wmt-m7geMDP7B4t2J1cCXbsbkJ6uG-EEICzpCHJC6EyHRZcb6bxBBHC56NyXdmMCvTkuTZQy7MbX4CVucIHcCzgXAryVpbEhebwuEjU1YY9jAEkfeOUpT3dGnOBJuyMlS_GQLnn4nQJCxIwvZftGbjBgN8",
-    "spotifyRefreshToken": "AQAZNdPV-H-Q1HJIzCF1c0xr4M0ABW25_tcpE1dwsWWysYV7HvTvDTCxnjav-h7859CQO5NhYYb7ZajiH1kc-4xGd88UQ77Rpbuf4UpYIfFYsmSh5_Rs30nukmOo48TsM4U",
-    "spotifyUserId": "zyf2slegyr92o9ub0219y8kdl"
-  },
-  {
-    "username": "userB",
-    "password": "B",
-    "groupName": "TestPlaylist",
-    "isGroupLeader": false,
-    "spotifyAccessToken": null,
-    "spotifyRefreshToken": null,
-    "spotifyUserId": null
-  },
-  {
-    "username": "monsieur",
     "password": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
     "groupName": "groupe1",
     "isGroupLeader": false,
+    "spotifyAccessToken": null,
+    "spotifyRefreshToken": null,
+    "spotifyUserId": null
+  },
+  {
+    "username": "thomas",
+    "password": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+    "groupName": "groupe1",
+    "isGroupLeader": true,
     "spotifyAccessToken": "BQCsPGhWjLnC2LhfZ4E_fU-nNWGVrXUkv4l0fQK30ncttYWVH5MRA1j3ByPuWdPLCZjtWAy1Pk2MwzADpRmwv1Cip3UPcWMJ56blrhb_FbHy1B1X0qXXQH5f1BNIAOKKewyPC2ZvnftXUSy77M2pXCalBrmi5lvDInAK1-pIp4rM_8Ggksr68XLZ720cc-0phd30Dx7cO2S3HT6031omof0IQRbKaByiQ_5RiDVUeBcDmjBkDSug3HfXYSJ_RLN2c5uDQCYOTJ4DS7FWMwtkv3eBGw9OkjEQbNY77OcbNk3mXYJeXoK0",
     "spotifyRefreshToken": "AQCkC1-BlSMp6jXCRLxRpJfPQ0iGjXa0600FRDLYrIy7GP8sfhi_oprXzIIe9DVZQobSchAnRUNfSg-NuEXTVeoJbL2nYD9vdMVOLS0Z9ffDFfvFJp7eitgrRq2Es3jhXt8",
     "spotifyUserId": "akhpw3hj8iyxokg1rmccxdd6z"
