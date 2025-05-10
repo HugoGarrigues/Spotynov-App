@@ -71,8 +71,6 @@ API NestJS intégrant Spotify pour analyser les goûts musicaux des utilisateurs
     SPOTIFY_CLIENT_ID=your_client_id
     SPOTIFY_CLIENT_SECRET=your_client_secret
     SPOTIFY_REDIRECT_URI=your_redirect_uri
-    JWT_SECRET=your_jwt_secret
-    JWT_EXPIRATION=1h
     ```
 3. **Lancer le projet avec Docker**
     ```sh

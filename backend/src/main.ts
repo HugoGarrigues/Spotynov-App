@@ -12,7 +12,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Spotynov API')
-    .setDescription('API pour l’authentification et la gestion des utilisateurs')
+    .setDescription('API documentation for Spotynov')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

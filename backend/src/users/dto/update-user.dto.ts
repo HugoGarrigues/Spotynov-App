@@ -30,7 +30,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
 
   @ApiPropertyOptional({
     description: 'Nouveau nom de groupe (si applicable)',
-    example: 'JazzLovers',
+    example: 'groupe2',
   })
   @IsString()
   @IsOptional()
@@ -51,4 +51,13 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsString()
   @IsOptional()
   spotifyRefreshToken?: string;
+
+  @ApiPropertyOptional({
+    description: 'Id Spotify de l’utilisateur',
+    example: 'spotify_user_id',
+  })
+  @IsString()
+  @IsOptional()
+  spotifyUserId?: string;
+
 }
