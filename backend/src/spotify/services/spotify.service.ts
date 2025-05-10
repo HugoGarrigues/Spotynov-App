@@ -18,6 +18,7 @@ export class SpotifyService {
       'user-top-read',
       'user-read-playback-state',
       'user-library-read',
+      'user-top-read playlist-modify-private',
     ].join(' ');
 
     return `https://accounts.spotify.com/authorize` +
@@ -75,7 +76,6 @@ export class SpotifyService {
     }
   
     const user = await this.usersService.findOne(username);
-    console.log('🧪 Fetched user from JSON:', user);
   
     if (!user || !user.spotifyAccessToken) {
       throw new Error('Utilisateur non connecté à Spotify');
@@ -106,5 +106,58 @@ export class SpotifyService {
       averageDurationMs: avgDuration,
     };
   }
+
+async createTopTracksPlaylist(adminUsername: string, targetUsername: string): Promise<any> {
+  const users = await this.usersService.findAll();
+  const adminUser = users.find(u => u.username === adminUsername);
+  const targetUser = users.find(u => u.username === targetUsername);
+
+  if (!adminUser || !targetUser) {
+    throw new Error('Utilisateur introuvable');
+  }
+
+  if (!adminUser.groupName || adminUser.groupName !== targetUser.groupName) {
+    throw new Error('Les deux utilisateurs doivent être dans le même groupe');
+  }
+
+  const adminToken = adminUser.spotifyAccessToken;
+  const targetToken = targetUser.spotifyAccessToken;
+
+  if (!adminToken || !targetToken) {
+    throw new Error('Les deux utilisateurs doivent être connectés à Spotify');
+  }
+
+  const topRes = await axios.get<{ items: { uri: string }[] }>(
+    'https://api.spotify.com/v1/me/top/tracks?limit=10',
+    { headers: { Authorization: `Bearer ${targetToken}` } },
+  );
+
+  const uris = topRes.data.items.map(item => item.uri);
+  if (uris.length === 0) {
+    throw new Error('Aucune musique préférée trouvée pour cet utilisateur');
+  }
+
+  const profileRes = await axios.get<{ id: string }>(
+    'https://api.spotify.com/v1/me',
+    { headers: { Authorization: `Bearer ${adminToken}` } },
+  );
+  const userId = profileRes.data.id;
+
+  const playlistRes = await axios.post<{ id: string }>(
+    `https://api.spotify.com/v1/users/${userId}/playlists`,
+    { name: `Top 10 de ${targetUsername}`, public: false },
+    { headers: { Authorization: `Bearer ${adminToken}` } },
+  );
+  const playlistId = playlistRes.data.id;
+
+  await axios.post(
+    `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+    { uris },
+    { headers: { Authorization: `Bearer ${adminToken}` } },
+  );
+
+  return { message: 'Playlist créée avec succès', playlistId };
+}
+
   
 }
