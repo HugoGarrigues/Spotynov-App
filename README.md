@@ -68,9 +68,9 @@ API NestJS intégrant Spotify pour analyser les goûts musicaux des utilisateurs
    ```
 2. **Créer un fichier `.env` dans le dossier `backend/src`**
    ```sh 
-    SPOTIFY_CLIENT_ID=15c200c1e6e741cf8597f39ac477226f
-    SPOTIFY_CLIENT_SECRET=c8ce45c285c54250bf2adc34290a2203
-    SPOTIFY_REDIRECT_URI=http://127.0.0.1:3000/auth/spotify/callback
+    SPOTIFY_CLIENT_ID=your_client_id
+    SPOTIFY_CLIENT_SECRET=your_client_secret
+    SPOTIFY_REDIRECT_URI=your_redirect_uri
     JWT_SECRET=your_jwt_secret
     JWT_EXPIRATION=1h
     ```
