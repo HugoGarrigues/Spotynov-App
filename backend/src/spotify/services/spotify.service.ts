@@ -76,7 +76,6 @@ export class SpotifyService {
     }
   
     const user = await this.usersService.findOne(username);
-    console.log('🧪 Fetched user from JSON:', user);
   
     if (!user || !user.spotifyAccessToken) {
       throw new Error('Utilisateur non connecté à Spotify');

@@ -2,11 +2,11 @@
   {
     "username": "hgrs",
     "password": "password123",
-    "isGroupLeader": true,
-    "groupName": "testThomas",
-    "spotifyAccessToken": null,
-    "spotifyRefreshToken": null,
-    "spotifyUserId": null
+    "isGroupLeader": false,
+    "spotifyAccessToken": "BQC_cp0PiB_l3Zgm1no2DVwOJmZoZHatihGMci_I5hYYXbckpfdhkolW4ycXXQ0AJR2_b9pJdrshZWYYo4CwNepYPfuPAr6sWYNT00boa26Q6mrspQ-BrfLdfnQ4gLgsXepN-1WA0SUakAoHatodgcGq60-FbMvW-QREEk6QTEBj5XfE5xWYhTTlF22UtXdb6S6uoQu12gduWwoGJUr54JFChWxiKSPz-qZkkVcqkWMOg76J4qEpVXRaSGrtpo7D0xswo9fClhw6eAHzGRlQd5ewhDe5rWC-T0teGie1puT64EX-dXU",
+    "spotifyRefreshToken": "AQCZfV3o124mYi5W_TC8bffBxZT6DlCbNpUzSCCyCaZgXroDSrK4OtOUfOmGnkvOg1ULXGroJXKWp1R31bJqbw8rh7G84db4pxOCFNzQ9hrLRxdwX5yzgmJTRYi341THzdE",
+    "spotifyUserId": "akhpw3hj8iyxokg1rmccxdd6z",
+    "groupName": "groupe1"
   },
   {
     "username": "test",
@@ -17,7 +17,7 @@
   {
     "username": "johndoe",
     "password": "password123",
-    "isGroupLeader": false,
+    "isGroupLeader": true,
     "groupName": "testThomas"
   },
   {
@@ -25,9 +25,9 @@
     "password": "password123",
     "groupName": "groupe1",
     "isGroupLeader": true,
-    "spotifyAccessToken": "BQA-GW088tHsMNX0Tc12xu3a7gD1KqRWzztMfbQvV-qJQJFKCuGKrToJ3LLaWqbDaETVETIliv8sIRvw3rVBd4GKEML45XYySurr3mN2yS5wv0_-ssPlpj9EtYlD4BuN780W6lAn9Us8e1HUePsM0E6HRMhvR6LQS7fTyMuewNno62t5qMkSypFQMbNSVI900ePLhyGh5ZxTdzemUw6xP836qfMzhb0Mcs9v7NdCQ_vT4qyNfYiN6SfSRsU23v_wfxijRs_pfrTdDor-mO4ZRA",
-    "spotifyRefreshToken": "AQCccYQmM8Y0eDrmD_YD49CuYzEme11GQmHO76yNBpPxN2QU64CNEJHnsxWhcIbWPykiCiFhz1OHYPFvZi9qBNR_5UphL4afj32dN-JB8Ed-0HL42xGtfcnmMnQJyqe_rCI",
-    "spotifyUserId": "akhpw3hj8iyxokg1rmccxdd6z"
+    "spotifyAccessToken": "BQC_cp0PiB_l3Zgm1no2DVwOJmZoZHatihGMci_I5hYYXbckpfdhkolW4ycXXQ0AJR2_b9pJdrshZWYYo4CwNepYPfuPAr6sWYNT00boa26Q6mrspQ-BrfLdfnQ4gLgsXepN-1WA0SUakAoHatodgcGq60-FbMvW-QREEk6QTEBj5XfE5xWYhTTlF22UtXdb6S6uoQu12gduWwoGJUr54JFChWxiKSPz-qZkkVcqkWMOg76J4qEpVXRaSGrtpo7D0xswo9fClhw6eAHzGRlQd5ewhDe5rWC-T0teGie1puT64EX-dXU",
+    "spotifyRefreshToken": "AQCZfV3o124mYi5W_TC8bffBxZT6DlCbNpUzSCCyCaZgXroDSrK4OtOUfOmGnkvOg1ULXGroJXKWp1R31bJqbw8rh7G84db4pxOCFNzQ9hrLRxdwX5yzgmJTRYi341THzdE",
+    "spotifyUserId": null
   },
   {
     "username": "johnfdoe",

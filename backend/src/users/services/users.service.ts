@@ -25,7 +25,6 @@ export class UsersService {
   async findOne(username: string): Promise<User | undefined> {
     const users = this.readFile();
     const found = users.find(user => user.username === username);
-    console.log('🔍 Recherche utilisateur :', username, 'Résultat trouvé :', found);
     return found;
   }
 
@@ -43,6 +42,7 @@ export class UsersService {
       isGroupLeader: false,
       spotifyAccessToken: null,
       spotifyRefreshToken: null,
+      spotifyUserId: null,
     };
 
     users.push(newUser);
